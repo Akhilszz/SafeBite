@@ -12,7 +12,7 @@ export const Blacklist = () => {
     const [status, setStatus] = useState(false);
     const [penalty, setPenalty] = useState(0);
 
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app'
     const authToken = localStorage.getItem('authTokenOfficer');
     const district = localStorage.getItem('officerDistrict');
 
@@ -125,7 +125,7 @@ export const Blacklist = () => {
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {(type === 'approved' ? hotelApproved : hotelBlacklisted).map(data => (
                                 <div key={data._id} className="bg-white shadow-lg rounded-lg border border-gray-300 p-4 flex flex-col items-center">
-                                    <img src={`https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app/${data.image}`} alt="hotel" className="w-full h-36 object-cover rounded mb-4" />
+                                    <img src={`https://safe-bite.vercel.app/${data.image}`} alt="hotel" className="w-full h-36 object-cover rounded mb-4" />
                                     <h1 className="text-lg font-semibold mb-1">{data.name}</h1>
                                     <h3 className="text-sm text-gray-700 mb-1">Email: {data.email}</h3>
                                     <div className="text-sm">

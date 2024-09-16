@@ -8,7 +8,7 @@ export const HotelInspection = () => {
 
 
 
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app'
     const authToken = localStorage.getItem('authTokenHotel');
     const hotelID = localStorage.getItem('hotelID');
 

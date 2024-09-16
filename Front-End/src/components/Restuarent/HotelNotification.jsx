@@ -6,7 +6,7 @@ export const HotelNotification = () => {
     const [notifications, setNotifications] = useState([]);
     const [activeTab, setActiveTab] = useState('notifications');
 
-    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverURL = 'https://safe-bite.vercel.app'
     const Email = localStorage.getItem('hotelEmail');
 
     useEffect(() => {

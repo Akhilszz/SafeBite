@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const Register = () => {
     const nav = useNavigate();
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app'
 
     const [userType, setUserType] = useState("User");
     const [name, setName] = useState("");

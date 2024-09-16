@@ -15,7 +15,7 @@ export const Notification = () => {
     const { name, id } = useContext(mycontext);
     const [noid, setID] = useState(id);
 
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app'
     const authToken = localStorage.getItem('authTokenOfficer');
     const officerId = localStorage.getItem('officerID');
     const district = localStorage.getItem('officerDistrict');

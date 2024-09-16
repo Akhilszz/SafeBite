@@ -12,7 +12,7 @@ export const Request = () => {
 
     const { setId, setName } = useContext(mycontext);
 
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app'
     const authToken = localStorage.getItem('authTokenOfficer');
     const district = localStorage.getItem('officerDistrict');
 
@@ -132,7 +132,7 @@ export const Request = () => {
                                     {registrationData.map(data => (
                                         <div key={data._id} className="bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
                                             <img
-                                                src={`http://localhost:5000/${data.image}`}
+                                                src={`https://safe-bite.vercel.app/${data.image}`}
                                                 alt="hotel"
                                                 className="w-full h-40 object-cover"
                                             />
@@ -208,7 +208,7 @@ export const Request = () => {
                                                     </td>
                                                     <td className="py-3 px-6 text-left">
                                                         <button
-                                                            onClick={() => handleDownload(`http://localhost:5000/${data.document}`, data.document)}
+                                                            onClick={() => handleDownload(`https://safe-bite.vercel.app/${data.document}`, data.document)}
                                                             className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
                                                         >
                                                             Download

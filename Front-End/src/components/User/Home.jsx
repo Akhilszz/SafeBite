@@ -7,7 +7,7 @@ export const Home = () => {
     const [activeTab, setActiveTab] = useState('all');
     const [locationDetails, setLocationDetails] = useState(null);
 
-    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverURL = 'https://safe-bite.vercel.app'
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -111,7 +111,7 @@ export const Home = () => {
                                 style={{ width: '100%', maxWidth: '280px' }} // Adjust card size
                             >
                                 <img
-                                    src={`https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app/${data.image}`}
+                                    src={`https://safe-bite.vercel.app/${data.image}`}
                                     alt={data.name}
                                     className="w-full h-36 object-cover"
                                 />

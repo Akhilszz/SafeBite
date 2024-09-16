@@ -49,7 +49,7 @@ export const UserNavbar = () => {
                             <div>
                                 <Menu.Button className="flex items-center text-white rounded-full p-2 focus:outline-none ">
                                     <img
-                                        src={`https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app/${image}`}
+                                        src={`https://safe-bite.vercel.app/${image}`}
                                         alt="User"
                                         className="rounded-full w-10 h-10 object-cover"
                                     />

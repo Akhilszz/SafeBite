@@ -8,7 +8,7 @@ export const Inspection = () => {
     const [id, setID] = useState('');
     const [error, setError] = useState('');
 
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app'
     const authToken = localStorage.getItem('authTokenOfficer');
     const officerID = localStorage.getItem('officerID');
     const district = localStorage.getItem('officerDistrict');

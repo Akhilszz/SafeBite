@@ -13,7 +13,7 @@ export const Action = () => {
     const [permissionError, setPermissionError] = useState('');
     const [reportError, setReportError] = useState('');
 
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app'
     const officerID = localStorage.getItem('officerID');
 
     const nav = useNavigate()

@@ -7,7 +7,7 @@ export const HotelFeedback = () => {
     const [activeTab, setActiveTab] = useState('complaints');
     const [replyText, setReplyText] = useState('');
     const [replyTarget, setReplyTarget] = useState(null); // Track which item to reply to
-    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverURL = 'https://safe-bite.vercel.app'
     const Email = localStorage.getItem('hotelEmail');
 
     useEffect(() => {

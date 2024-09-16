@@ -13,7 +13,7 @@ export const AdminNotification = () => {
 
     const { id, email, name } = useContext(mycontext);
 
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app';
+    const serverUrl = 'https://safe-bite.vercel.app'
     const authToken = localStorage.getItem('authTokenOfficer');
 
     useEffect(() => {

@@ -11,7 +11,7 @@ export const UserProfile = () => {
     const [image, setImage] = useState(null);
     const [edit, setEdit] = useState(false);
 
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app'
     const userId = localStorage.getItem('userID');
     const nav = useNavigate();
 
@@ -97,7 +97,7 @@ export const UserProfile = () => {
                         <div className="flex flex-col items-center">
                             <div className="relative">
                                 <img
-                                    src={`https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app/${user.image}`}
+                                    src={`https://safe-bite.vercel.app/${user.image}`}
                                     alt="User"
                                     className="rounded-full w-24 h-24 object-cover border-2 border-blue-500"
                                 />

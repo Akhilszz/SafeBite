@@ -10,7 +10,7 @@ export const HotelMain = () => {
     const [formData, setFormData] = useState({}); // Form data for editing
     const [selectedImage, setSelectedImage] = useState(null); // State to handle selected image
 
-    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverURL = 'https://safe-bite.vercel.app'
     const Email = localStorage.getItem('hotelEmail');
 
     const { setAmount, setId } = useContext(mycontext);
@@ -118,7 +118,7 @@ export const HotelMain = () => {
                             hotel.map(data => (
                                 <tr key={data._id}>
                                     <td className="py-2 px-4 border-b">
-                                        <img src={`https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app/${data.image}`} alt={data.name} className="w-16 h-16 object-cover rounded-full" />
+                                        <img src={`https://safe-bite.vercel.app/${data.image}`} alt={data.name} className="w-16 h-16 object-cover rounded-full" />
                                     </td>
                                     <td className="py-2 px-4 border-b">{data.liceno}</td>
                                     <td className="py-2 px-4 border-b">{data.name}</td>

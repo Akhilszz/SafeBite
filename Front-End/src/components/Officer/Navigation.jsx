@@ -39,7 +39,7 @@ export const Navigation = () => {
                         onClick={toggleDropdown}
                     >
                         <img
-                            src={`https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app/${image}`}
+                            src={`https://safe-bite.vercel.app/${image}`}
                             alt="User"
                             className="rounded-full w-10 h-10"
                         />

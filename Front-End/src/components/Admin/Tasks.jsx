@@ -15,7 +15,7 @@ export const Tasks = () => {
     const [errors, setErrors] = useState({ licenseNumber: '' }); // Validation state
 
     const { setEmail, setId, setName } = useContext(mycontext);
-    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverURL = 'https://safe-bite.vercel.app'
 
     const nav = useNavigate();
 
@@ -173,7 +173,7 @@ export const Tasks = () => {
                                                     </td>
                                                     <td className="py-3 px-6 text-left">
                                                         <button
-                                                            onClick={() => handleDownload(`http://localhost:5000/${data.document}`, data.document)}
+                                                            onClick={() => handleDownload(`https://safe-bite.vercel.app/${data.document}`, data.document)}
                                                             className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
                                                         >
                                                             Download
@@ -268,7 +268,7 @@ export const Tasks = () => {
                                                     </td>
                                                     <td className="py-3 px-6 text-left">
                                                         <button
-                                                            onClick={() => handleDownload(`http://localhost:5000/${data.document}`, data.document)}
+                                                            onClick={() => handleDownload(`https://safe-bite.vercel.app/${data.document}`, data.document)}
                                                             className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
                                                         >
                                                             Download
