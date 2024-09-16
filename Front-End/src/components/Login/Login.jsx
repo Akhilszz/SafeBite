@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const Login = () => {
     const nav = useNavigate();
-    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app'
 
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
@@ -207,8 +207,8 @@ export const Login = () => {
                             type="password"
                             className="w-full p-2 border border-gray-300 rounded mt-1"
                             required
-                            // pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$"
-                            // title="Password must be at least 8 characters long and include at least one letter and one digit"
+                        // pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$"
+                        // title="Password must be at least 8 characters long and include at least one letter and one digit"
                         />
                         <button onClick={handleResetPassword} className="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600">
                             Reset Password
