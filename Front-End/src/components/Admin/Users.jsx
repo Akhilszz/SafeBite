@@ -8,7 +8,7 @@ export const User = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const serverUrl = 'http://localhost:5000';
+    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
 
     async function fetchUser() {
         try {
@@ -82,7 +82,7 @@ export const User = () => {
                             {users.map(user => (
                                 <tr key={user.id}>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        <img src={`http://localhost:5000/${user.image}`} alt={user.name} className="w-10 h-10 rounded-full object-cover" />
+                                        <img src={`https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app/${user.image}`} alt={user.name} className="w-10 h-10 rounded-full object-cover" />
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.name}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email}</td>

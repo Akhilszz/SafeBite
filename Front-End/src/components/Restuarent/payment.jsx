@@ -14,7 +14,7 @@ export const PaymentPage = () => {
 
     const { amount, id, setAmount } = useContext(mycontext);
 
-    const serverURL = 'http://localhost:5000';
+    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
 
     async function handlePay() {
 

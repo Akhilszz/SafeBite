@@ -12,7 +12,7 @@ export const Request = () => {
 
     const { setId, setName } = useContext(mycontext);
 
-    const serverUrl = 'http://localhost:5000';
+    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
     const authToken = localStorage.getItem('authTokenOfficer');
     const district = localStorage.getItem('officerDistrict');
 

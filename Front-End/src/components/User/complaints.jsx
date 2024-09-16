@@ -8,7 +8,7 @@ export const Complaints = () => {
     const [selectedHotelId, setSelectedHotelId] = useState('');
     const [proof, setProof] = useState(''); // State to handle the uploaded image
 
-    const serverURL = 'http://localhost:5000';
+    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
     const userID = localStorage.getItem('userID');
 
     useEffect(() => {

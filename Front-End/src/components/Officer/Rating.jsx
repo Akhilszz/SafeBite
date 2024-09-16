@@ -7,7 +7,7 @@ export const Rating = () => {
     const [rating, setRating] = useState(false);
     const [id, setId] = useState(0);
     const [rate, setRate] = useState('');
-    const serverUrl = 'http://localhost:5000';
+    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
     const authToken = localStorage.getItem('authTokenOfficer')
     const district = localStorage.getItem('officerDistrict');
 
@@ -72,7 +72,7 @@ export const Rating = () => {
                             {hotels.map((data) => (
                                 <div key={data._id} className="bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
                                     <img
-                                        src={`http://localhost:5000/${data.image}`}
+                                        src={`https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app/${data.image}`}
                                         alt="hotel"
                                         className="w-full h-40 object-cover"
                                     />

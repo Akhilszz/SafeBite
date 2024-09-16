@@ -16,7 +16,7 @@ export const Officer = () => {
     });
     const [selectedOfficerId, setSelectedOfficerId] = useState(null);
 
-    const serverUrl = 'http://localhost:5000';
+    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app';
 
     useEffect(() => {
         fetchOfficers();
@@ -189,7 +189,7 @@ export const Officer = () => {
                                             <tbody className="bg-white divide-y divide-gray-200">
                                                 {officers.map(officer => (
                                                     <tr key={officer._id}>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><img src={`http://localhost:5000/${officer.image}`} className="rounded-full w-10 h-10" /></td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><img src={`https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app/${officer.image}`} className="rounded-full w-10 h-10" /></td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{officer.name}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{officer.email}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{officer.district}</td>

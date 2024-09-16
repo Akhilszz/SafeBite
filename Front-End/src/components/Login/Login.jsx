@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const Login = () => {
     const nav = useNavigate();
-    const serverUrl = 'http://localhost:5000';
+    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
 
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");

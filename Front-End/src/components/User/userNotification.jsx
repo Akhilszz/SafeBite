@@ -7,7 +7,7 @@ export const UserNoti = () => {
     const [inspectorData, setInspectorData] = useState([]);
     const [complaints, setComplaints] = useState([]);
     const [suggestions, setSuggestions] = useState([]);
-    const serverURL = 'http://localhost:5000';
+    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
     const userID = localStorage.getItem('userID');
 
     useEffect(() => {

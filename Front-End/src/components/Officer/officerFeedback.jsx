@@ -7,7 +7,7 @@ export const OffiFeedback = () => {
     const [hotels, setHotels] = useState([]);
     const [showComplaints, setShowComplaints] = useState({}); // Track visibility for complaints per hotel
 
-    const serverUrl = 'http://localhost:5000';
+    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
     const authToken = localStorage.getItem('authTokenOfficer');
     const officerID = localStorage.getItem('officerID');
     const district = localStorage.getItem('officerDistrict');

@@ -6,7 +6,7 @@ export const RequestRes = () => {
     const [activeTab, setActiveTab] = useState('Approval');
     const [hotel, setHotel] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
-    const serverURL = 'http://localhost:5000';
+    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
     const Email = localStorage.getItem('hotelEmail');
     const hotelId = localStorage.getItem('hotelID');
 

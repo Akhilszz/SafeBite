@@ -7,7 +7,7 @@ export const Suggetions = () => {
     const [suggestion, setSuggestion] = useState('');
     const [selectedHotelId, setSelectedHotelId] = useState('');
 
-    const serverURL = 'http://localhost:5000';
+    const serverURL = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app'
     const userID = localStorage.getItem('userID')
 
     useEffect(() => {

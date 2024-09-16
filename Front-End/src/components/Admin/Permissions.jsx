@@ -13,7 +13,7 @@ export const Permissions = () => {
 
     const nav = useNavigate()
 
-    const serverUrl = 'http://localhost:5000';
+    const serverUrl = 'https://safe-bite-czz1t4l2z-akhilszzs-projects.vercel.app';
 
     useEffect(() => {
         fetchOfficers();
