@@ -11,7 +11,7 @@ const auth = require('../middleware/Authenticate')
 
 
 
-router.post('/register/user', User.registerUser);
+router.post('/register/User', User.registerUser);
 router.post('/register/Restaurant', Hotel.registerHotel);
 router.post('/login', Login.Login)
 router.get('/GetHotel', Hotel.GetHotel)

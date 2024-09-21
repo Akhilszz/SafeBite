@@ -10,7 +10,7 @@ export const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("");
-    const [file, setFile] = useState("");
+    const [profileUrl, setProfileUrl] = useState(""); // Updated to profileUrl instead of file
     const [state, setState] = useState("");
     const [city, setCity] = useState("");
     const [pincode, setPincode] = useState("");
@@ -21,10 +21,12 @@ export const Register = () => {
     async function submit(event) {
         event.preventDefault();
 
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('password', pass);
+        const formData = {
+            name,
+            email,
+            password: pass,
+            image: profileUrl, // Using profileUrl for profile image as a URL
+        };
 
         if (userType === "Restaurant") {
             const address = [{
@@ -35,17 +37,11 @@ export const Register = () => {
                 phone: phone  // Add phone number to address
             }];
 
-            formData.append('address', JSON.stringify(address));
+            formData.address = address;
         }
 
-        if (file) formData.append('image', file);
-
         try {
-            const res = await axios.post(`${serverUrl}/api/register/${userType}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            const res = await axios.post(`${serverUrl}/api/register/${userType}`, formData);
             if (res.data.success) {
                 console.log(res.data);
                 nav('/');
@@ -61,7 +57,7 @@ export const Register = () => {
         setName("");
         setEmail("");
         setPass("");
-        setFile("");
+        setProfileUrl(""); // Clear profile URL
         setState("");
         setCity("");
         setPincode("");
@@ -184,15 +180,13 @@ export const Register = () => {
                         type="password"
                         className="w-full p-2 border border-gray-300 rounded mt-1"
                         required
-                        // pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$"
-                        // title="Password must be at least 8 characters long and include at least one letter and one digit"
                         value={pass}
                     />
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700">Profile Url</label>
                     <input
-                        onChange={(e) => setFile(e.target.value)}
+                        onChange={(e) => setProfileUrl(e.target.value)} // Updated to setProfileUrl
                         type="text"
                         required
                         className="w-full p-2 border border-gray-300 rounded mt-1"
