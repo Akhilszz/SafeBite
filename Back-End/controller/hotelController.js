@@ -7,7 +7,6 @@ const bcrypt = require('bcryptjs');
 const registerHotel = async (req, res) => {
     try {
         const { name, email, address, request, password, liceno, image } = req.body;
-        // const image = req.file.filename;
 
         let parsedAddress;
         try {
@@ -18,28 +17,22 @@ const registerHotel = async (req, res) => {
 
         // Check if a hotel or user already exists with the same email
         let hotel = await Hotel.findOne({ email }) || await User.findOne({ email });
-
         if (hotel) {
             return res.status(200).json({ success: false, msg: 'User already exists' });
         }
 
-        // Create a new hotel instance
+        // Create and save the hotel
         hotel = new Hotel({
             name,
             email,
-            address: parsedAddress, // Assign the parsed address
+            address: parsedAddress,
             request,
-            password,
-            image,
+            password: await bcrypt.hash(password, 10),
+            image, // Store the image string
             liceno,
         });
 
-        // Hash the password before saving
-        hotel.password = await bcrypt.hash(password, 10);
-
-        // Save the new hotel to the database
         await hotel.save();
-
         return res.status(201).json({ success: true, msg: 'Hotel registered successfully' });
 
     } catch (err) {
@@ -47,6 +40,7 @@ const registerHotel = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
+
 
 
 const GetHotel = async (req, res) => {
@@ -138,13 +132,11 @@ const Update = async (req, res) => {
 
 const AddComp = async (req, res) => {
     const { userId, hotelId, complaint, proof } = req.body;
-    // const proof = req.file.filename
 
-    console.log(proof)
     try {
         await User.updateOne(
             { _id: userId },
-            { $push: { complaints: { hotelId, complaint, proof } } }
+            { $push: { complaints: { hotelId, complaint, proof } } } // Storing proof as a string
         );
         await Hotel.updateOne(
             { _id: hotelId },
@@ -154,7 +146,8 @@ const AddComp = async (req, res) => {
     } catch (err) {
         res.status(500).send({ success: false, msg: 'Error sending complaint' });
     }
-}
+};
+
 
 const AddSugge = async (req, res) => {
     const { userId, hotelId, suggestion } = req.body;
@@ -338,16 +331,13 @@ const GetInspection = async (req, res) => {
 const DocumentUpload = async (req, res) => {
     try {
         const { hotelId } = req.params;
-        const { document } = req.body
+        const { document } = req.body; // Document received as a string (URL/base64)
 
-        // console.log(hotelId);
-
-
-        if (document) {
-            return res.status(400).send('No file uploaded.');
+        if (!document) {
+            return res.status(400).send('No document uploaded.');
         }
 
-
+        // Update the hotel with the document string and status
         const updatedHotel = await Hotel.findByIdAndUpdate(
             hotelId,
             { document: document, status: 'uploaded' },
@@ -365,7 +355,8 @@ const DocumentUpload = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Failed to upload document' });
     }
-}
+};
+
 
 
 

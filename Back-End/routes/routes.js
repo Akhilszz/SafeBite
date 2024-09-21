@@ -11,21 +11,21 @@ const auth = require('../middleware/Authenticate')
 
 
 
-router.post('/register/user',  User.registerUser);
-router.post('/register/Restaurant',  Hotel.registerHotel);
+router.post('/register/user', User.registerUser);
+router.post('/register/Restaurant', Hotel.registerHotel);
 router.post('/login', Login.Login)
 router.get('/GetHotel', Hotel.GetHotel)
 router.post('/request/:id', Hotel.Update)
-router.put('/updatehotel/:id',  Hotel.Update)
-router.post('/addofficer',  Officer.AddOfficer)
+router.put('/updatehotel/:id', Hotel.Update)
+router.post('/addofficer', Officer.AddOfficer)
 router.get('/getofficer', Officer.GetOfficer)
-router.put('/updateOfficer/:id',  Officer.UpdateOfficer)
-router.post('/report/:id',  Officer.Report)
+router.put('/updateOfficer/:id', Officer.UpdateOfficer)
+router.post('/report/:id', Officer.Report)
 router.delete('/deleteOfficer/:id', Officer.DeleteOfficer)
 router.get('/getuser', User.GetUser)
-router.put('/updateUserStatus/:id',  User.updateUSerStatus)
+router.put('/updateUserStatus/:id', User.updateUserStatus)
 router.put('/blacklist/:id', Hotel.Update)
-router.post('/sendComplaint',  Hotel.AddComp)
+router.post('/sendComplaint', Hotel.AddComp)
 router.post('/sendSuggestion', Hotel.AddSugge)
 router.post('/publicnotification', Noti.PublicNoti)
 router.post('/hotelnotification/:id', Noti.HotelNoti)

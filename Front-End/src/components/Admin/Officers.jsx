@@ -12,11 +12,11 @@ export const Officer = () => {
         email: '',
         district: '',
         password: '',
-        image: '', // Image field
+        image: '', // Image URL field
     });
     const [selectedOfficerId, setSelectedOfficerId] = useState(null);
 
-    const serverUrl = 'https://safe-bite.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app';
 
     useEffect(() => {
         fetchOfficers();
@@ -35,17 +35,9 @@ export const Officer = () => {
 
     async function handleAddOfficer(event) {
         event.preventDefault();
-        const formData = new FormData();
-        for (const key in newOfficer) {
-            formData.append(key, newOfficer[key]);
-        }
 
         try {
-            const res = await axios.post(`${serverUrl}/api/addofficer`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const res = await axios.post(`${serverUrl}/api/addofficer`, newOfficer);
             if (res.data.success) {
                 alert(res.data.msg);
                 fetchOfficers();
@@ -61,20 +53,9 @@ export const Officer = () => {
 
     async function handleEditOfficer(event) {
         event.preventDefault();
-        const formData = new FormData();
-
-        for (const key in newOfficer) {
-            if (key !== 'password' || (key === 'password' && newOfficer[key])) {
-                formData.append(key, newOfficer[key]);
-            }
-        }
 
         try {
-            const res = await axios.put(`${serverUrl}/api/updateOfficer/${selectedOfficerId}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const res = await axios.put(`${serverUrl}/api/updateOfficer/${selectedOfficerId}`, newOfficer);
             if (res.data.success) {
                 alert(res.data.msg);
                 setEdit(false);
@@ -91,18 +72,11 @@ export const Officer = () => {
     }
 
     function handleChange(event) {
-        const { name, value, type, files } = event.target;
-        if (type === 'file') {
-            setNewOfficer(prevState => ({
-                ...prevState,
-                [name]: files[0],
-            }));
-        } else {
-            setNewOfficer(prevState => ({
-                ...prevState,
-                [name]: value,
-            }));
-        }
+        const { name, value } = event.target;
+        setNewOfficer(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
     }
 
     function handleChangeView(newType) {
@@ -189,7 +163,7 @@ export const Officer = () => {
                                             <tbody className="bg-white divide-y divide-gray-200">
                                                 {officers.map(officer => (
                                                     <tr key={officer._id}>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><img src={officer.image} className="rounded-full w-10 h-10" /></td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><img src={officer.image} className="rounded-full w-10 h-10" alt="Officer" /></td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{officer.name}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{officer.email}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{officer.district}</td>
@@ -245,10 +219,11 @@ export const Officer = () => {
                                             <input
                                                 type="text"
                                                 name="image"
+                                                placeholder="Image URL"
+                                                value={newOfficer.image}
                                                 onChange={handleChange}
                                                 className="w-full px-4 py-2 border border-gray-300 rounded"
-                                                    required={edit !== true}
-                                                    placeholder="image url"
+                                                required
                                             />
                                             <div className="flex space-x-4">
                                                 <button
