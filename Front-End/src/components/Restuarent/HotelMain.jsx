@@ -118,7 +118,7 @@ export const HotelMain = () => {
                             hotel.map(data => (
                                 <tr key={data._id}>
                                     <td className="py-2 px-4 border-b">
-                                        <img src={`https://safe-bite.vercel.app/${data.image}`} alt={data.name} className="w-16 h-16 object-cover rounded-full" />
+                                        <img src={data.image} alt={data.name} className="w-16 h-16 object-cover rounded-full" />
                                     </td>
                                     <td className="py-2 px-4 border-b">{data.liceno}</td>
                                     <td className="py-2 px-4 border-b">{data.name}</td>
@@ -223,9 +223,10 @@ export const HotelMain = () => {
                         <div className="mb-4">
                             <label className="block text-gray-700">Image:</label>
                             <input
-                                type="file"
+                                type="text"
                                 onChange={handleImageChange}
                                 className="w-full px-3 py-2 border rounded"
+                                placeholder="image url"
                             />
                             {selectedImage && (
                                 <div className="mt-2">

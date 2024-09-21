@@ -4,8 +4,8 @@ const bcrypt = require('bcryptjs');
 
 
 const AddOfficer = async (req, res) => {
-    const { name, email, password, district } = req.body
-    const image = req.file.filename;
+    const { name, email, password, district, image } = req.body
+    // const image = req.file.filename;
 
     try {
         // Check if an officer with the same email or district exists
@@ -63,14 +63,14 @@ const GetOfficer = async (req, res) => {
 
 const UpdateOfficer = async (req, res) => {
     const { id } = req.params;
-    const { name, email, password, district } = req.body;
+    const { name, email, password, district, image } = req.body;
 
     // Initialize update data
-    let updateData = { name, email, district };
+    let updateData = { name, email, district, image };
 
     // Conditionally include image if it exists
-    if (req.file && req.file.filename) {
-        updateData.image = req.file.filename;
+    if (image) {
+        updateData.image = image;
     }
 
     try {
@@ -97,7 +97,7 @@ const UpdateOfficer = async (req, res) => {
 const Report = async (req, res) => {
     try {
         const { id } = req.params
-        const documentPath = req.file.filename;
+        const documentPath = req.body;
 
 
         await Officer.findByIdAndUpdate(id, { document: documentPath });

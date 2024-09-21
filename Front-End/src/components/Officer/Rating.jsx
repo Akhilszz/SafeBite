@@ -72,7 +72,7 @@ export const Rating = () => {
                             {hotels.map((data) => (
                                 <div key={data._id} className="bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
                                     <img
-                                        src={`https://safe-bite.vercel.app/${data.image}`}
+                                        src={data.image}
                                         alt="hotel"
                                         className="w-full h-40 object-cover"
                                     />

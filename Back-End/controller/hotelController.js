@@ -6,8 +6,8 @@ const bcrypt = require('bcryptjs');
 
 const registerHotel = async (req, res) => {
     try {
-        const { name, email, address, request, password, liceno } = req.body;
-        const image = req.file.filename;
+        const { name, email, address, request, password, liceno, image } = req.body;
+        // const image = req.file.filename;
 
         let parsedAddress;
         try {
@@ -72,16 +72,19 @@ const Update = async (req, res) => {
     let updateData = {}; // Initialize an empty object for the fields to update
 
     // If image file is provided, add it to the update data
-    if (req.file) {
-        updateData.image = req.file.filename;
-    }
+    // if (req.file) {
+    //     updateData.image = req.file.filename;
+    // }
 
     // Destructure the body fields
-    const { request, blacklist, penalty, address, rating, status, liceno } = req.body;
+    const { request, blacklist, penalty, address, rating, status, liceno, image } = req.body;
 
     // Conditionally add each field if it is provided
     if (request) {
         updateData.request = request;
+    }
+    if (image) {
+        updateData.image = image;
     }
 
     if (blacklist !== undefined) {
@@ -134,8 +137,8 @@ const Update = async (req, res) => {
 
 
 const AddComp = async (req, res) => {
-    const { userId, hotelId, complaint } = req.body;
-    const proof = req.file.filename
+    const { userId, hotelId, complaint, proof } = req.body;
+    // const proof = req.file.filename
 
     console.log(proof)
     try {
@@ -335,18 +338,19 @@ const GetInspection = async (req, res) => {
 const DocumentUpload = async (req, res) => {
     try {
         const { hotelId } = req.params;
+        const { document } = req.body
 
         // console.log(hotelId);
 
 
-        if (!req.file) {
+        if (document) {
             return res.status(400).send('No file uploaded.');
         }
 
 
         const updatedHotel = await Hotel.findByIdAndUpdate(
             hotelId,
-            { document: req.file.filename, status: 'uploaded' },
+            { document: document, status: 'uploaded' },
             { new: true }
         );
 

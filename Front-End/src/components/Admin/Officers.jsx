@@ -12,7 +12,7 @@ export const Officer = () => {
         email: '',
         district: '',
         password: '',
-        image: null, // Image field
+        image: '', // Image field
     });
     const [selectedOfficerId, setSelectedOfficerId] = useState(null);
 
@@ -127,7 +127,7 @@ export const Officer = () => {
             email: '',
             district: '',
             password: '',
-            image: null,
+            image: '',
         });
         setSelectedOfficerId(null);
         setEdit(false); // Exit edit mode if editing
@@ -189,7 +189,7 @@ export const Officer = () => {
                                             <tbody className="bg-white divide-y divide-gray-200">
                                                 {officers.map(officer => (
                                                     <tr key={officer._id}>
-                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><img src={`https://safe-bite.vercel.app/${officer.image}`} className="rounded-full w-10 h-10" /></td>
+                                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"><img src={officer.image} className="rounded-full w-10 h-10" /></td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{officer.name}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{officer.email}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{officer.district}</td>
@@ -243,11 +243,12 @@ export const Officer = () => {
                                                 required={edit !== true}
                                             />
                                             <input
-                                                type="file"
+                                                type="text"
                                                 name="image"
                                                 onChange={handleChange}
                                                 className="w-full px-4 py-2 border border-gray-300 rounded"
-                                                required={edit !== true}
+                                                    required={edit !== true}
+                                                    placeholder="image url"
                                             />
                                             <div className="flex space-x-4">
                                                 <button

@@ -190,10 +190,10 @@ export const Register = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Upload Image</label>
+                    <label className="block text-gray-700">Profile Url</label>
                     <input
-                        onChange={(e) => setFile(e.target.files[0])}
-                        type="file"
+                        onChange={(e) => setFile(e.target.value)}
+                        type="text"
                         required
                         className="w-full p-2 border border-gray-300 rounded mt-1"
                     />

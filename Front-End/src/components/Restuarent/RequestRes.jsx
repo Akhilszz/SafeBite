@@ -5,7 +5,7 @@ import { Nav } from './Nav';
 export const RequestRes = () => {
     const [activeTab, setActiveTab] = useState('Approval');
     const [hotel, setHotel] = useState([]);
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState('');
     const serverURL = 'https://safe-bite.vercel.app'
     const Email = localStorage.getItem('hotelEmail');
     const hotelId = localStorage.getItem('hotelID');
@@ -166,10 +166,11 @@ export const RequestRes = () => {
                                                         <li>Labor Compliance Certificates</li>
                                                     </ul>
                                                     <input
-                                                        type="file"
-                                                        onChange={(e) => setSelectedFile(e.target.files[0])}
+                                                        type="text"
+                                                        onChange={(e) => setSelectedFile(e.target.value)}
                                                         className="block mb-4 border border-gray-300 rounded-md shadow-sm"
-                                                        required
+                                                                required
+                                                                placeholder='document drive link'
                                                     />
 
                                                     <button

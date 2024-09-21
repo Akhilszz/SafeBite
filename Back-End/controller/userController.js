@@ -4,8 +4,8 @@ const bcrypt = require('bcryptjs');
 
 const registerUser = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
-        const image = req.file.filename
+        const { name, email, password, image } = req.body;
+        // const image = req.file.filename
 
         console.log(image);
 
@@ -58,12 +58,12 @@ const GetUser = async (req, res) => {
 
 const updateUSerStatus = async (req, res) => {
     const { id } = req.params;
-    const { status, name, email, password } = req.body;
-    let updateData = { status, name, email };
+    const { status, name, email, password, image } = req.body;
+    let updateData = { status, name, email, image };
 
     // Conditionally add image if it's provided
-    if (req.file && req.file.filename) {
-        updateData.image = req.file.filename;
+    if (image) {
+        updateData.image = image;
     }
 
     try {
