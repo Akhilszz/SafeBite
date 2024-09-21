@@ -37,7 +37,7 @@ export const Register = () => {
                 phone: phone  // Add phone number to address
             }];
 
-            formData.address = address;
+            formData.address = JSON.stringify(address)
         }
 
         try {
