@@ -211,10 +211,10 @@ export const Officer = () => {
                                                 type="password"
                                                 name="password"
                                                 placeholder="Password"
-                                                value={edit !== true ? newOfficer.password : ''}
+                                                // value={edit !== true ? newOfficer.password : ''}
                                                 onChange={handleChange}
                                                 className="w-full px-4 py-2 border border-gray-300 rounded"
-                                                required={edit !== true}
+                                                required={edit === false}
                                             />
                                             <input
                                                 type="text"
