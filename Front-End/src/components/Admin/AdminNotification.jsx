@@ -8,10 +8,12 @@ export const AdminNotification = () => {
     const [officers, setOfficers] = useState([]);
     const [title, setTitle] = useState('');
     const [details, setDetails] = useState('');
-    const [inid, setID] = useState('');
+
     const [errors, setErrors] = useState({ title: '', details: '', inid: '' }); // State to track errors
 
     const { id, email, name } = useContext(mycontext);
+
+    const [inid, setID] = useState(id);
 
     const serverUrl = 'https://safe-bite.vercel.app'
     const authToken = localStorage.getItem('authTokenOfficer');
@@ -104,7 +106,7 @@ export const AdminNotification = () => {
                         <select
                             className={`p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono ${errors.inid ? 'border-red-500' : ''}`}
                             onChange={(e) => setID(e.target.value)}
-                            value={inid || id}
+                            value={inid}
                         >
                             <option value={`${name} | ${email}`}>Select Inspector</option>
                             {officers.map(data => (
