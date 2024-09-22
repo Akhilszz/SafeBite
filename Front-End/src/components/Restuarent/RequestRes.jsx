@@ -86,8 +86,8 @@ export const RequestRes = () => {
     return (
         <div>
             <Nav />
-            <div className="bg-white md:ml-64 mt-20 md:mr-8 shadow-md rounded-lg max-md:ml-4 p-4">
-                <div className="flex border-b border-gray-200 max-md:flex-col">
+            <div className="bg-white ml-64 mt-20 mr-8 shadow-md rounded-lg max-md:ml-4">
+                <div className="flex border-b border-gray-200">
                     <button
                         className={`flex-1 py-2 px-4 text-center text-sm font-medium ${activeTab === 'Approval' ? 'bg-blue-500 text-white' : 'text-blue-500'} border-b-2 border-transparent hover:border-blue-500`}
                         onClick={() => setActiveTab('Approval')}
@@ -106,11 +106,11 @@ export const RequestRes = () => {
                     {activeTab === 'Approval' && hotel.map(data => (
                         <div key={data._id}>
                             {data.request === 'none' ? (
-                                <p className="flex flex-col sm:flex-row items-center justify-between">
+                                <p>
                                     Request for Hotel Registration
                                     <button
                                         onClick={() => handleRequest(data._id)}
-                                        className="bg-blue-500 text-white py-1 px-2 mt-2 sm:mt-0 sm:ml-2 rounded hover:bg-blue-600"
+                                        className="bg-blue-500 text-white py-1 px-2 ml-2 rounded hover:bg-blue-600"
                                     >
                                         Request
                                     </button>
@@ -134,13 +134,17 @@ export const RequestRes = () => {
                                     ) : (
                                         <div>
                                             {renderMilestone(data.status)}
-                                            {data.status !== 'generated' && (
+                                            {data.status === 'uploaded' || data.status === 'verified' || data.status === 'approved' || data.status === 'generated' ? (
+                                                <div>
+                                                    {/* Additional content can go here */}
+                                                </div>
+                                            ) : (
                                                 <div>
                                                     <h2 className="text-lg font-semibold mb-4">Upload Required Documents</h2>
                                                     <p className="mb-4">
                                                         Please upload the following documents as a single link required for obtaining a hotel license & grade:
                                                     </p>
-                                                    <ul className="list-disc pl-5 mb-4 text-sm">
+                                                    <ul className="list-disc pl-5 mb-4">
                                                         <li>Certificate of Incorporation</li>
                                                         <li>Partnership Deed or Memorandum of Association</li>
                                                         <li>Property Ownership Proof</li>
@@ -159,14 +163,14 @@ export const RequestRes = () => {
                                                     <input
                                                         type="text"
                                                         onChange={(e) => setDocumentLink(e.target.value)} // Set document link
-                                                        className="block w-full mb-4 border border-gray-300 rounded-md shadow-sm p-2"
+                                                        className="block mb-4 border border-gray-300 rounded-md shadow-sm"
                                                         required
                                                         placeholder='Document link (e.g., Google Drive or Dropbox link)'
                                                     />
 
                                                     <button
                                                         onClick={handleDocumentLinkUpload} // Trigger document link upload
-                                                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-full sm:w-auto"
+                                                        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
                                                     >
                                                         Upload Document Link
                                                     </button>
