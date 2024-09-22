@@ -10,6 +10,9 @@ export const Permissions = () => {
     const [activeTab, setActiveTab] = useState('Requests');
     const [officers, setOfficers] = useState([]);
 
+
+    const serverUrl = 'https://safe-bite.vercel.app';
+
     const nav = useNavigate();
 
     useEffect(() => {
@@ -18,7 +21,7 @@ export const Permissions = () => {
 
     const fetchOfficers = async () => {
         try {
-            const response = await axios.get(`/api/getofficer`);
+            const response = await axios.get(`${serverUrl}/api/getofficer`);
             if (response.data.success) {
                 setOfficers(response.data.officers);
             }
@@ -43,7 +46,7 @@ export const Permissions = () => {
 
     const handleGrant = async (id, permId, status) => {
         try {
-            const response = await axios.post(`/api/permissiongrant`, {
+            const response = await axios.post(`${serverUrl}/api/permissiongrant`, {
                 officerId: id,
                 permissionId: permId,
                 status: status,
