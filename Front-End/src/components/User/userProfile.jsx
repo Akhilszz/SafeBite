@@ -97,7 +97,7 @@ export const UserProfile = () => {
                         <div className="flex flex-col items-center">
                             <div className="relative">
                                 <img
-                                    src={`https://safe-bite.vercel.app/${user.image}`}
+                                    src={user.image}
                                     alt="User"
                                     className="rounded-full w-24 h-24 object-cover border-2 border-blue-500"
                                 />

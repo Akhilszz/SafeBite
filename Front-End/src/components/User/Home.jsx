@@ -111,7 +111,7 @@ export const Home = () => {
                                 style={{ width: '100%', maxWidth: '280px' }} // Adjust card size
                             >
                                 <img
-                                    src={`https://safe-bite.vercel.app/${data.image}`}
+                                    src={data.image}
                                     alt={data.name}
                                     className="w-full h-36 object-cover"
                                 />

@@ -85,7 +85,7 @@ export const OffiFeedback = () => {
                                                     <div className="mb-4">
                                                         <p className="text-gray-800 font-medium mb-2">Proof:</p>
                                                         <img
-                                                            src={`${serverUrl}/${complaint.proof}`}
+                                                            src={complaint.proof}
                                                             alt="Proof"
                                                             className="w-full h-auto max-w-xs border border-gray-200 rounded-md"
                                                         />
