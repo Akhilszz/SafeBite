@@ -8,15 +8,15 @@ export const Action = () => {
     const [innerTab, setInnerTab] = useState('Requested');
     const [permissionText, setPermissionText] = useState('');
     const [title, setTitle] = useState('');
-    const [file, setFile] = useState(null);
+    const [fileLink, setFileLink] = useState('');
     const [officers, setOfficers] = useState([]);
     const [permissionError, setPermissionError] = useState('');
     const [reportError, setReportError] = useState('');
 
-    const serverUrl = 'https://safe-bite.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app';
     const officerID = localStorage.getItem('officerID');
 
-    const nav = useNavigate()
+    const nav = useNavigate();
 
     useEffect(() => {
         GetOfficers();
@@ -37,7 +37,6 @@ export const Action = () => {
     const handlePermissionSubmit = async () => {
         setPermissionError('');
 
-        // Validate fields
         if (!title || !permissionText) {
             setPermissionError('Please fill in all fields.');
             return;
@@ -68,28 +67,23 @@ export const Action = () => {
     const handleReportSubmit = async () => {
         setReportError('');
 
-        if (!file) {
-            setReportError('Please select a file to upload.');
+        if (!fileLink) {
+            setReportError('Please enter a file link.');
             return;
         }
 
-        const formData = new FormData();
-        formData.append('document', file);
-
         try {
-            const response = await axios.post(`${serverUrl}/api/report/${officerID}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
+            const response = await axios.post(`${serverUrl}/api/report/${officerID}`, {
+                document: fileLink
             });
 
-            console.log('File uploaded successfully:', response.data);
-            alert('File uploaded successfully.');
-            setFile(null);
-            nav('/action')
+            console.log('File link submitted successfully:', response.data);
+            alert('File link submitted successfully.');
+            setFileLink('');
+            nav('/action');
         } catch (error) {
-            console.error('Error uploading file:', error);
-            setReportError('Error uploading file. Please try again.');
+            console.error('Error submitting file link:', error);
+            setReportError('Error submitting file link. Please try again.');
         }
     };
 
@@ -98,13 +92,11 @@ export const Action = () => {
             <Navigation />
 
             <div className="p-6 mt-12 ml-72 max-md:ml-0">
-                {/* Main Tabs */}
                 <div className="flex border-b border-gray-300">
                     {['Permission', 'ReportSubmission', 'Request'].map(tab => (
                         <button
                             key={tab}
-                            className={`py-2 px-6 text-sm font-semibold transition-colors ${activeTab === tab ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-blue-100'
-                                }`}
+                            className={`py-2 px-6 text-sm font-semibold transition-colors ${activeTab === tab ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-blue-100'}`}
                             onClick={() => setActiveTab(tab)}
                         >
                             {tab.replace(/([A-Z])/g, ' $1').trim()}
@@ -112,7 +104,6 @@ export const Action = () => {
                     ))}
                 </div>
 
-                {/* Tab Content Container */}
                 <div className="bg-white shadow-md rounded-lg p-6 mt-4">
                     {activeTab === 'Permission' && (
                         <div>
@@ -154,10 +145,12 @@ export const Action = () => {
                                 </div>
                             )}
                             <input
-                                type="file"
-                                className="mb-4"
+                                type="text"
+                                className="w-full p-3 border border-gray-300 rounded mb-4"
+                                placeholder="Enter file link"
+                                value={fileLink}
+                                onChange={(e) => setFileLink(e.target.value)}
                                 required
-                                onChange={(e) => setFile(e.target.files[0])}
                             />
                             <button
                                 className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
@@ -169,13 +162,11 @@ export const Action = () => {
                     )}
                     {activeTab === 'Request' && (
                         <div>
-                            {/* Inner Tabs for Requests */}
                             <div className="flex border-b border-gray-300 mb-4">
                                 {['Requested', 'Granted'].map(status => (
                                     <button
                                         key={status}
-                                        className={`py-2 px-6 text-sm font-semibold transition-colors ${innerTab === status ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-blue-100'
-                                            }`}
+                                        className={`py-2 px-6 text-sm font-semibold transition-colors ${innerTab === status ? 'bg-blue-500 text-white' : 'bg-white text-blue-500 hover:bg-blue-100'}`}
                                         onClick={() => setInnerTab(status)}
                                     >
                                         {status}
@@ -186,7 +177,7 @@ export const Action = () => {
                                 officers.map(officer => (
                                     <div key={officer._id} className="border border-gray-200 p-4 rounded-lg mb-4 shadow-sm">
                                         {officer.permission
-                                            .filter(data => data.status.toLowerCase() === innerTab.toLowerCase()) // Filter by status
+                                            .filter(data => data.status.toLowerCase() === innerTab.toLowerCase())
                                             .map(data => (
                                                 <div key={data._id} className="mb-2">
                                                     <p className="text-sm"><strong>Title:</strong> {data.title}</p>

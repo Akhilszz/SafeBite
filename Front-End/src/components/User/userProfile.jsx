@@ -8,15 +8,14 @@ export const UserProfile = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [image, setImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState('');  // Changed from image file to URL
     const [edit, setEdit] = useState(false);
 
-    const serverUrl = 'https://safe-bite.vercel.app'
+    const serverUrl = 'https://safe-bite.vercel.app';
     const userId = localStorage.getItem('userID');
     const nav = useNavigate();
 
     useEffect(() => {
-
         fetchUser();
     }, []);
 
@@ -27,6 +26,7 @@ export const UserProfile = () => {
                 setUser(res.data.user);
                 setName(res.data.user.name);
                 setEmail(res.data.user.email);
+                setImageUrl(res.data.user.image);  // Set the existing image URL
             } else {
                 console.log(res.data.msg);
             }
@@ -37,17 +37,17 @@ export const UserProfile = () => {
 
     async function handleUpdate() {
         try {
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('email', email);
-            if (password) formData.append('password', password);
-            if (image) formData.append('image', image);
+            const updateData = {
+                name,
+                email,
+                image: imageUrl,  // Use the image URL
+            };
 
-            const res = await axios.put(`${serverUrl}/api/updateUserStatus/${userId}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            if (password) {
+                updateData.password = password;
+            }
+
+            const res = await axios.put(`${serverUrl}/api/updateUserStatus/${userId}`, updateData);
 
             if (res.data.success) {
                 alert('Updated successfully');
@@ -59,17 +59,12 @@ export const UserProfile = () => {
             }
         } catch (err) {
             console.log('Update error:', err);
-
         }
     }
 
     function handleCancel() {
         setEdit(false);
         setPassword('');
-    }
-
-    function handleImageChange(e) {
-        setImage(e.target.files[0]);
     }
 
     async function handleDelete() {
@@ -84,7 +79,7 @@ export const UserProfile = () => {
                 alert(res.data.msg);
             }
         } catch (err) {
-            console.log('delete error:', err);
+            console.log('Delete error:', err);
         }
     }
 
@@ -151,8 +146,10 @@ export const UserProfile = () => {
                                         className="w-full mb-3 px-3 py-2 border border-gray-300 rounded-lg"
                                     />
                                     <input
-                                        type="file"
-                                        onChange={handleImageChange}
+                                        type="text"
+                                        value={imageUrl}  // Use image URL
+                                        onChange={(e) => setImageUrl(e.target.value)}
+                                        placeholder="Image URL"
                                         className="w-full mb-3 px-3 py-2 border border-gray-300 rounded-lg"
                                     />
                                     <div className="flex space-x-3">

@@ -6,15 +6,11 @@ import { mycontext } from "../Context/MyContext";
 
 export const HotelMain = () => {
     const [hotel, setHotel] = useState([]);
-    const [editHotel, setEditHotel] = useState(null); // State to store the hotel being edited
-    const [formData, setFormData] = useState({}); // Form data for editing
-    const [selectedImage, setSelectedImage] = useState(null); // State to handle selected image
-
-    const serverURL = 'https://safe-bite.vercel.app'
+    const [editHotel, setEditHotel] = useState(null);
+    const [formData, setFormData] = useState({});
+    const serverURL = 'https://safe-bite.vercel.app';
     const Email = localStorage.getItem('hotelEmail');
-
     const { setAmount, setId } = useContext(mycontext);
-
     const nav = useNavigate();
 
     useEffect(() => {
@@ -52,7 +48,6 @@ export const HotelMain = () => {
                 phone: hotel.address[0].phone
             }
         });
-        setSelectedImage(null); // Reset selected image when editing
     }
 
     async function handleSave() {
@@ -64,31 +59,20 @@ export const HotelMain = () => {
             phone: formData.address.phone
         }];
 
-        const formDataToSend = new FormData();
-        formDataToSend.append('name', formData.name);
-        formDataToSend.append('address', JSON.stringify(address)); // Append address as a JSON string
-        if (selectedImage) {
-            formDataToSend.append('image', selectedImage); // Append selected image
-        }
+        const formDataToSend = {
+            name: formData.name,
+            address: JSON.stringify(address),
+            image: formData.image // Using the URL directly
+        };
 
         try {
-            const res = await axios.put(`${serverURL}/api/updatehotel/${editHotel._id}`, formDataToSend, {
-                headers: {
-                    'Content-Type': 'multipart/form-data' // Ensure form data is handled properly
-                }
-            });
+            const res = await axios.put(`${serverURL}/api/updatehotel/${editHotel._id}`, formDataToSend);
             if (res.data.success) {
-                fetchHotel(); // Refresh the hotel data after updating
+                fetchHotel(); // Refresh hotel data
                 setEditHotel(null); // Close the edit form after success
             }
         } catch (err) {
             console.log('Update error', err);
-        }
-    }
-
-    function handleImageChange(event) {
-        if (event.target.files.length > 0) {
-            setSelectedImage(event.target.files[0]); // Set selected image
         }
     }
 
@@ -221,19 +205,14 @@ export const HotelMain = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Image:</label>
+                            <label className="block text-gray-700">Image URL:</label>
                             <input
                                 type="text"
-                                onChange={handleImageChange}
+                                value={formData.image}
+                                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                                 className="w-full px-3 py-2 border rounded"
-                                placeholder="image url"
+                                placeholder="Enter image URL"
                             />
-                            {selectedImage && (
-                                <div className="mt-2">
-                                    <p>Selected Image:</p>
-                                    <img src={URL.createObjectURL(selectedImage)} alt="Selected" className="w-32 h-32 object-cover" />
-                                </div>
-                            )}
                         </div>
                         <button
                             onClick={handleSave}

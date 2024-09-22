@@ -1,19 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { saveAs } from 'file-saver';
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import { mycontext } from '../Context/MyContext';
 import { useNavigate } from 'react-router-dom';
 
 export const Permissions = () => {
-    const { setEmail, setId, setName } = useContext(mycontext)
+    const { setEmail, setId, setName } = useContext(mycontext);
     const [activeTab, setActiveTab] = useState('Requests');
     const [officers, setOfficers] = useState([]);
 
-    const nav = useNavigate()
-
-    const serverUrl = 'https://safe-bite.vercel.app';
+    const nav = useNavigate();
 
     useEffect(() => {
         fetchOfficers();
@@ -21,7 +18,7 @@ export const Permissions = () => {
 
     const fetchOfficers = async () => {
         try {
-            const response = await axios.get(`${serverUrl}/api/getofficer`);
+            const response = await axios.get(`/api/getofficer`);
             if (response.data.success) {
                 setOfficers(response.data.officers);
             }
@@ -30,25 +27,23 @@ export const Permissions = () => {
         }
     };
 
-    const handleDownload = (fileUrl, fileName) => {
-        saveAs(fileUrl, fileName);
+    const handleDownload = (fileUrl) => {
+        window.open(fileUrl, '_blank');
     };
 
     function handleMessage(inId, inEmail, inName) {
-        setId(inId)
-        setEmail(inEmail)
-        setName(inName)
-        nav('/adminNoti')
+        setId(inId);
+        setEmail(inEmail);
+        setName(inName);
+        nav('/adminNoti');
     }
-
-
 
     const requests = officers.filter(officer => officer.permission && officer.permission.length > 0);
     const reports = officers.filter(officer => officer.document && officer.document.length > 0);
 
     const handleGrant = async (id, permId, status) => {
         try {
-            const response = await axios.post(`${serverUrl}/api/permissiongrant`, {
+            const response = await axios.post(`/api/permissiongrant`, {
                 officerId: id,
                 permissionId: permId,
                 status: status,
@@ -160,10 +155,10 @@ export const Permissions = () => {
                                                     </td>
                                                     <td className="py-3 px-6 text-left">
                                                         <button
-                                                            onClick={() => handleDownload(`http://localhost:5000/${officer.document}`, officer.document)}
+                                                            onClick={() => handleDownload(officer.document)}
                                                             className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
                                                         >
-                                                            Download
+                                                            View
                                                         </button>
                                                     </td>
 
