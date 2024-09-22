@@ -6,9 +6,9 @@ export const Complaints = () => {
     const [hotels, setHotels] = useState([]);
     const [complaint, setComplaint] = useState('');
     const [selectedHotelId, setSelectedHotelId] = useState('');
-    const [proof, setProof] = useState(''); // State to handle the uploaded image
+    const [proof, setProof] = useState(''); // State to handle the proof URL
 
-    const serverURL = 'https://safe-bite.vercel.app'
+    const serverURL = 'https://safe-bite.vercel.app';
     const userID = localStorage.getItem('userID');
 
     useEffect(() => {
@@ -36,24 +36,21 @@ export const Complaints = () => {
             return;
         }
 
-        const formData = new FormData(); // Use FormData to handle file uploads
-        formData.append('userId', userID);
-        formData.append('hotelId', selectedHotelId);
-        formData.append('complaint', complaint);
-        formData.append('proof', proof); // Attach the proof image
+        const formData = {
+            userId: userID,
+            hotelId: selectedHotelId,
+            complaint: complaint,
+            proof: proof, // Attach the proof URL
+        };
 
         try {
-            const res = await axios.post(`${serverURL}/api/sendComplaint`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const res = await axios.post(`${serverURL}/api/sendComplaint`, formData);
 
             if (res.data.success) {
                 alert('Complaint registered successfully');
                 setComplaint('');
                 setSelectedHotelId('');
-                setProof(''); // Clear the file input
+                setProof(''); // Clear the proof URL
             } else {
                 alert('Something went wrong');
             }
@@ -97,12 +94,13 @@ export const Complaints = () => {
                             />
                         </div>
                         <div>
-                            <label htmlFor="proof" className="block text-lg font-medium text-gray-700 mb-2">Proof (Required)</label>
+                            <label htmlFor="proof" className="block text-lg font-medium text-gray-700 mb-2">Proof URL (Required)</label>
                             <input
                                 id="proof"
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => setProof(e.target.files[0])}
+                                type="text"
+                                value={proof}
+                                onChange={(e) => setProof(e.target.value)}
+                                placeholder="Enter the URL of the proof"
                                 className="block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2 bg-white"
                                 required
                             />
@@ -115,7 +113,7 @@ export const Complaints = () => {
                         </button>
                     </form>
                     <p className="mt-6 text-gray-600 text-sm">
-                        Please ensure that the proof you upload is significant to your complaint. All complaints are also reviewed by the respective district inspector.
+                        Please ensure that the proof you provide is significant to your complaint. All complaints are also reviewed by the respective district inspector.
                     </p>
                 </div>
             </div>

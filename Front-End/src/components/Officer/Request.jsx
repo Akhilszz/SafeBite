@@ -22,8 +22,8 @@ export const Request = () => {
         fetchHotel();
     }, []);
 
-    const handleDownload = (fileUrl, fileName) => {
-        saveAs(fileUrl, fileName);
+    const handleDownload = (fileUrl) => {
+        window.open(fileUrl, '_blank');
     };
 
     async function fetchHotel() {
@@ -208,7 +208,7 @@ export const Request = () => {
                                                     </td>
                                                     <td className="py-3 px-6 text-left">
                                                         <button
-                                                            onClick={() => handleDownload(`https://safe-bite.vercel.app/${data.document}`, data.document)}
+                                                            onClick={() => handleDownload(data.document)}
                                                             className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600"
                                                         >
                                                             Download
